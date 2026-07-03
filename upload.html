@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อัปโหลดรูปภาพ - โรงเรียนบ้านหนองโป่ง</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .upload-section {
+            margin-bottom: 30px;
+        }
+
+        .upload-section h2 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 15px 20px;
+            background-color: #f9f9f9;
+            border: 2px dashed #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .file-input-label:hover {
+            background-color: #667eea;
+            color: white;
+        }
+
+        input[type="file"]:focus + .file-input-label {
+            outline: 2px solid #667eea;
+        }
+
+        .preview {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .preview-name {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95em;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-upload {
+            background-color: #51cf66;
+            color: white;
+        }
+
+        .btn-upload:hover {
+            background-color: #40c057;
+        }
+
+        .btn-upload:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background-color: #5568d3;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: #667eea;
+        }
+
+        .image-list {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+
+        .image-list h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .image-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .image-item-name {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .image-item-size {
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 อัปโหลดรูปภาพ</h1>
+        <p class="subtitle">โรงเรียนบ้านหนองโป่ง(ราษฎร์บำรุง)</p>
+
+        <div id="message" class="message"></div>
+
+        <div class="info-box">
+            <strong>📝 คำแนะนำ:</strong><br>
+            • รองรับรูปแบบ: JPG, PNG, GIF<br>
+            • ขนาดไฟล์สูงสุด: 5 MB<br>
+            • สำหรับโลโก้: ตั้งชื่อว่า <strong>logo.png</strong><br>
+            • สำหรับรูปผู้อำนวยการ: <strong>director.jpg</strong><br>
+            • สำหรับสมาชิกคณะกรรมการ: <strong>member1.jpg, member2.jpg, ฯลฯ</strong><br>
+            • สำหรับกิจกรรม: <strong>activity1.jpg, activity2.jpg, ฯลฯ</strong>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <!-- Upload Section 1: Logo -->
+            <div class="upload-section">
+                <h2>1️⃣ โลโก้โรงเรียน</h2>
+                <div class="form-group">
+                    <label>เลือกรูปโลโก้ (logo.png)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="logoFile" accept="image/*" onchange="previewImage(this, 'logoPreview')">
+                        <label for="logoFile" class="file-input-label">
+                            📁 คลิกหรือลากรูปที่นี่
+                        </label>
+                    </div>
+                    <div id="logoPreview" class="preview"></div>
+                </div>
+                <div class="form-group">
+                    <label>ชื่อไ���ล์ (ตั้งค่าเริ่มต้น: logo.png)</label>
+                    <input type="text" id="logoName" value="logo.png" placeholder="logo.png">
+                </div>
+            </div>
+
+            <!-- Upload Section 2: Director -->
+            <div class="upload-section">
+                <h2>2️⃣ รูปผู้อำนวยการสถานศึกษา</h2>
+                <div class="form-group">
+                    <label>เลือกรูปผู้อำนวยการ (director.jpg)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="directorFile" accept="image/*" onchange="previewImage(this, 'directorPreview')">
+                        <label for="directorFile" class="file-input-label">
+                            📁 คลิกหรือลากรูปที่นี่
+                        </label>
+                    </div>
+                    <div id="directorPreview" class="preview"></div>
+                </div>
+                <div class="form-group">
+                    <label>ชื่อไฟล์ (ตั้งค่าเริ่มต้น: director.jpg)</label>
+                    <input type="text" id="directorName" value="director.jpg" placeholder="director.jpg">
+                </div>
+            </div>
+
+            <!-- Upload Section 3: Committee Members -->
+            <div class="upload-section">
+                <h2>3️⃣ รูปสมาชิกคณะกรรมการ</h2>
+                <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">
+                    อัปโหลดรูปสมาชิกคณะกรรมการ 9 คน (ตั้งชื่อ member1.jpg ถึง member9.jpg)
+                </p>
+                <div class="form-group">
+                    <label>เลือกรูปสมาชิกคณะกรรมการ</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="memberFile" accept="image/*" multiple onchange="handleMultipleMembers(this)">
+                        <label for="memberFile" class="file-input-label">
+                            📁 เลือกหลายรูป (Ctrl+Click หรือ Shift+Click)
+                        </label>
+                    </div>
+                    <div id="memberPreview" class="preview"></div>
+                </div>
+            </div>
+
+            <!-- Upload Section 4: Activities -->
+            <div class="upload-section">
+                <h2>4️⃣ รูปกิจกรรม</h2>
+                <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">
+                    อัปโหลดรูปกิจกรรมต่างๆ (ตั้งชื่อ activity1.jpg, activity2.jpg, ฯลฯ)
+                </p>
+                <div class="form-group">
+                    <label>เลือกรูปกิจกรรม</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="activityFile" accept="image/*" multiple onchange="handleMultipleActivities(this)">
+                        <label for="activityFile" class="file-input-label">
+                            📁 เลือกหลายรูป (Ctrl+Click หรือ Shift+Click)
+                        </label>
+                    </div>
+                    <div id="activityPreview" class="preview"></div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="reset" class="btn-reset" onclick="resetForm()">🔄 รีเซ็ต</button>
+                <button type="button" class="btn-upload" onclick="submitUpload()">⬆️ อัปโหลด</button>
+            </div>
+        </form>
+
+        <!-- Image List -->
+        <div class="image-list" id="imageList" style="display: none;">
+            <h3>✅ รูปภาพที่อัปโหลด</h3>
+            <div id="uploadedImages"></div>
+        </div>
+    </div>
+
+    <script>
+        // Store files
+        let uploadedFiles = {
+            logo: null,
+            director: null,
+            members: [],
+            activities: []
+        };
+
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            const preview = document.getElementById(previewId);
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <div class="preview-name">${file.name} (${(file.size / 1024).toFixed(2)} KB)</div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleMultipleMembers(input) {
+            const preview = document.getElementById('memberPreview');
+            uploadedFiles.members = Array.from(input.files);
+            
+            if (uploadedFiles.members.length > 0) {
+                let html = '<div style="text-align: left;">';
+                uploadedFiles.members.forEach((file, index) => {
+                    html += `<div style="padding: 5px 0; color: #666; font-size: 0.9em;">
+                        ✓ ${file.name} (${(file.size / 1024).toFixed(2)} KB)
+                    </div>`;
+                });
+                html += '</div>';
+                preview.innerHTML = html;
+            }
+        }
+
+        function handleMultipleActivities(input) {
+            const preview = document.getElementById('activityPreview');
+            uploadedFiles.activities = Array.from(input.files);
+            
+            if (uploadedFiles.activities.length > 0) {
+                let html = '<div style="text-align: left;">';
+                uploadedFiles.activities.forEach((file, index) => {
+                    html += `<div style="padding: 5px 0; color: #666; font-size: 0.9em;">
+                        ✓ ${file.name} (${(file.size / 1024).toFixed(2)} KB)
+                    </div>`;
+                });
+                html += '</div>';
+                preview.innerHTML = html;
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('uploadForm').reset();
+            document.getElementById('logoPreview').innerHTML = '';
+            document.getElementById('directorPreview').innerHTML = '';
+            document.getElementById('memberPreview').innerHTML = '';
+            document.getElementById('activityPreview').innerHTML = '';
+            document.getElementById('imageList').style.display = 'none';
+            document.getElementById('message').className = 'message';
+            uploadedFiles = {
+                logo: null,
+                director: null,
+                members: [],
+                activities: []
+            };
+        }
+
+        function submitUpload() {
+            const logoFile = document.getElementById('logoFile').files[0];
+            const directorFile = document.getElementById('directorFile').files[0];
+            
+            if (!logoFile && !directorFile && uploadedFiles.members.length === 0 && uploadedFiles.activities.length === 0) {
+                showMessage('กรุณาเลือกรูปภาพอย่างน้อย 1 รูป', 'error');
+                return;
+            }
+
+            // Simulate upload
+            let uploadList = [];
+            
+            if (logoFile) {
+                uploadList.push({
+                    name: document.getElementById('logoName').value,
+                    size: logoFile.size,
+                    type: 'Logo'
+                });
+            }
+
+            if (directorFile) {
+                uploadList.push({
+                    name: document.getElementById('directorName').value,
+                    size: directorFile.size,
+                    type: 'ผู้อำนวยการ'
+                });
+            }
+
+            uploadedFiles.members.forEach((file, index) => {
+                uploadList.push({
+                    name: `member${index + 1}.jpg`,
+                    size: file.size,
+                    type: 'สมาชิกคณะกรรมการ'
+                });
+            });
+
+            uploadedFiles.activities.forEach((file, index) => {
+                uploadList.push({
+                    name: `activity${index + 1}.jpg`,
+                    size: file.size,
+                    type: 'กิจกรรม'
+                });
+            });
+
+            // Display uploaded images
+            let html = '';
+            uploadList.forEach(file => {
+                html += `
+                    <div class="image-item">
+                        <div>
+                            <div class="image-item-name">${file.name}</div>
+                            <div class="image-item-size">${file.type} • ${(file.size / 1024).toFixed(2)} KB</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('uploadedImages').innerHTML = html;
+            document.getElementById('imageList').style.display = 'block';
+
+            showMessage(`✅ อัปโหลดสำเร็จ! ทั้งหมด ${uploadList.length} รูป`, 'success');
+        }
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.className = 'message';
+                }, 5000);
+            }
+        }
+
+        // Drag and drop support
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
