@@ -1,1 +1,1212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โรงเรียนบ้านหนองโป่ง(ราษฎร์บำรุง)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #51cf66;
+            --danger: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="white" opacity="0.1"/><circle cx="80" cy="80" r="20" fill="white" opacity="0.05"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo {
+            width: 140px;
+            height: 140px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header-text h1 {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            background: linear-gradient(90deg, #2d3748 0%, #1a202c 100%);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        nav a:hover {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        main {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+
+        section {
+            background-color: white;
+            margin: 40px 0;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section h2 {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+            font-weight: 700;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* ==================== DIRECTOR SECTION ==================== */
+        .director-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .director-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 350px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .director-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .director-photo {
+            width: 220px;
+            height: 280px;
+            background-color: #ddd;
+            margin: 0 auto 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .director-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .director-card:hover .director-photo img {
+            transform: scale(1.05);
+        }
+
+        .director-info h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .director-info p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        /* ==================== DEPARTMENTS SECTION ==================== */
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 30px;
+        }
+
+        .department-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .department-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .department-card:hover::before {
+            transform: translate(30px, 30px);
+        }
+
+        .department-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .staff-member {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .staff-member:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .staff-member .name {
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+
+        .staff-member .position {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* ==================== COMMITTEE SECTION ==================== */
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .committee-member {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .committee-member:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-left-color: var(--accent);
+        }
+
+        .committee-member-photo {
+            width: 100%;
+            height: 180px;
+            background-color: #ddd;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .committee-member:hover .committee-member-photo {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .committee-member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .committee-member h3 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        .committee-member .position {
+            color: var(--primary);
+            font-size: 0.85em;
+            font-weight: 600;
+            background-color: rgba(102, 126, 234, 0.1);
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* ==================== ACTIVITIES SECTION ==================== */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow);
+        }
+
+        .activity-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            overflow: hidden;
+            position: relative;
+        }
+
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .activity-card:hover .activity-image img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .activity-content {
+            padding: 25px;
+        }
+
+        .activity-content h3 {
+            color: var(--dark);
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .activity-content p {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .activity-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, var(--danger), #ff5252);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--success), #40c057);
+            color: white;
+            padding: 13px 28px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
+            font-size: 1em;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(81, 207, 102, 0.5);
+        }
+
+        /* ==================== STATISTICS SECTION ==================== */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.95;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== CHART ==================== */
+        .chart-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 35px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chart-container h3 {
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a202c 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            border-top: 4px solid var(--primary);
+        }
+
+        footer p {
+            font-size: 0.95em;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 35px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .header-content {
+                gap: 20px;
+            }
+
+            .header-logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .header-text h1 {
+                font-size: 1.8em;
+            }
+
+            .header-text p {
+                font-size: 1em;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 12px 15px;
+                text-align: center;
+                width: 100%;
+            }
+
+            section {
+                padding: 30px 20px;
+                margin: 20px 0;
+            }
+
+            section h2 {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+
+            .director-container {
+                gap: 20px;
+            }
+
+            .director-card {
+                max-width: 100%;
+            }
+
+            .stat-number {
+                font-size: 2.2em;
+            }
+
+            .stat-label {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 25px 0;
+            }
+
+            .header-text h1 {
+                font-size: 1.5em;
+            }
+
+            section {
+                padding: 20px 15px;
+            }
+
+            section h2 {
+                font-size: 1.5em;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-logo">
+                    <img src="images/logo.png" alt="โลโก้โรงเรียน">
+                </div>
+                <div class="header-text">
+                    <h1>โรงเรียนบ้านหนองโป่ง(ราษฎร์บำรุง)</h1>
+                    <p>สำนักงานเขตพื้นที่การศึกษานครราชสีมา เขต 7</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul class="container">
+            <li><a href="#director">ผู้อำนวยการ</a></li>
+            <li><a href="#departments">ฝ่ายบริหาร</a></li>
+            <li><a href="#committee">คณะกรรมการ</a></li>
+            <li><a href="#activities">กิจกรรม</a></li>
+            <li><a href="#statistics">สถิติ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Director Section -->
+            <section id="director">
+                <h2>ผู้อำนวยการสถานศึกษา</h2>
+                <div class="director-container">
+                    <div class="director-card">
+                        <div class="director-photo">
+                            <img src="images/director.jpg" alt="ผู้อำนวยการ">
+                        </div>
+                        <div class="director-info">
+                            <h3>นายไพทูล ถาวร</h3>
+                            <p><strong>ตำแหน่ง:</strong> ผู้อำนวยการสถานศึกษา</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Departments Section -->
+            <section id="departments">
+                <h2>ฝ่ายบริหาร</h2>
+                <div class="departments-grid">
+                    <div class="department-card">
+                        <h3>💼 บริหารงานบุคลากร</h3>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                    </div>
+
+                    <div class="department-card">
+                        <h3>📚 บริหารงานวิชาการ</h3>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                    </div>
+
+                    <div class="department-card">
+                        <h3>🏢 บริหารงานทั่วไป</h3>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                    </div>
+
+                    <div class="department-card">
+                        <h3>💰 บริหารงบประมาณ</h3>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                        <div class="staff-member">
+                            <div class="name">ชื่อ - สกุล</div>
+                            <div class="position">ตำแหน่ง</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Committee Section -->
+            <section id="committee">
+                <h2>คณะกรรมการสถานศึกษาขั้นพื้นฐาน</h2>
+                <div class="committee-grid">
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member1.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member2.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member3.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member4.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member5.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member6.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member7.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member8.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+
+                    <div class="committee-member">
+                        <div class="committee-member-photo">
+                            <img src="images/member9.jpg" alt="สมาชิก">
+                        </div>
+                        <h3>ชื่อ - สกุล</h3>
+                        <p class="position">ตำแหน่ง</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activities Section -->
+            <section id="activities">
+                <h2>กิจกรรมของโรงเรียน</h2>
+                <button class="btn btn-add" onclick="openAddActivityModal()">+ เพิ่มกิจกรรม</button>
+                
+                <div class="activities-grid" id="activitiesContainer">
+                    <div class="activity-card">
+                        <div class="activity-image">
+                            <img src="images/activity1.jpg" alt="กิจกรรม">
+                        </div>
+                        <div class="activity-content">
+                            <h3>กิจกรรมตัวอย่าง</h3>
+                            <p>คำอธิบายเกี่ยวกับกิจกรรมของโรงเรียน</p>
+                            <div class="activity-actions">
+                                <button class="btn btn-edit" onclick="editActivityCard(this)">แก้ไข</button>
+                                <button class="btn btn-delete" onclick="deleteActivityCard(this)">ลบ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="statistics">
+                <h2>สถิตินักเรียน</h2>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStudents">0</div>
+                        <div class="stat-label">นักเรียนทั้งหมด</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="maleStudents">0</div>
+                        <div class="stat-label">นักเรียนชาย</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="femaleStudents">0</div>
+                        <div class="stat-label">นักเรียนหญิง</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>จำนวนนักเรียนจำแนกตามชั้นเรียน</h3>
+                    <canvas id="studentChart" width="400" height="200"></canvas>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 โรงเรียนบ้านหนองโป่ง(ราษฎร์บำรุง) | สำนักงานเขตพื้นที่การศึกษานครราชสีมา เขต 7</p>
+    </footer>
+
+    <!-- Activity Modal -->
+    <div id="activityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>เพิ่มกิจกรรม</h2>
+                <span class="close" onclick="closeActivityModal()">&times;</span>
+            </div>
+            <form onsubmit="saveActivity(event)">
+                <div class="form-group">
+                    <label for="activityTitle">ชื่อกิจกรรม:</label>
+                    <input type="text" id="activityTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="activityDesc">คำอธิบาย:</label>
+                    <textarea id="activityDesc" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="activityImage">ที่อยู่รูปภาพ:</label>
+                    <input type="text" id="activityImage" placeholder="images/activity.jpg">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-delete" onclick="closeActivityModal()">ยกเลิก</button>
+                    <button type="submit" class="btn btn-add">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const studentData = {
+            total: 145,
+            male: 75,
+            female: 70,
+            byClass: {
+                'ป.1': 25,
+                'ป.2': 24,
+                'ป.3': 23,
+                'ป.4': 22,
+                'ป.5': 28,
+                'ป.6': 23
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStudentStats();
+            drawChart();
+            loadActivities();
+        });
+
+        function updateStudentStats() {
+            document.getElementById('totalStudents').textContent = studentData.total;
+            document.getElementById('maleStudents').textContent = studentData.male;
+            document.getElementById('femaleStudents').textContent = studentData.female;
+        }
+
+        function drawChart() {
+            const canvas = document.getElementById('studentChart');
+            const ctx = canvas.getContext('2d');
+            
+            const classes = Object.keys(studentData.byClass);
+            const counts = Object.values(studentData.byClass);
+            
+            const barWidth = canvas.width / classes.length;
+            const maxCount = Math.max(...counts);
+            const scale = (canvas.height - 30) / maxCount;
+
+            // Draw gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, 'rgba(102, 126, 234, 0.8)');
+            gradient.addColorStop(1, 'rgba(118, 75, 162, 0.8)');
+
+            ctx.fillStyle = gradient;
+            classes.forEach((cls, index) => {
+                const x = index * barWidth + 10;
+                const barHeight = counts[index] * scale;
+                const y = canvas.height - barHeight - 20;
+                
+                ctx.fillRect(x, y, barWidth - 20, barHeight);
+                
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 12px Tahoma';
+                ctx.textAlign = 'center';
+                ctx.fillText(cls, x + (barWidth - 20) / 2, canvas.height - 5);
+                ctx.fillText(counts[index], x + (barWidth - 20) / 2, y - 5);
+                
+                ctx.fillStyle = gradient;
+            });
+        }
+
+        function openAddActivityModal() {
+            document.getElementById('activityModal').style.display = 'block';
+            document.querySelector('.modal-header h2').textContent = 'เพิ่มกิจกรรม';
+        }
+
+        function closeActivityModal() {
+            document.getElementById('activityModal').style.display = 'none';
+            document.getElementById('activityTitle').value = '';
+            document.getElementById('activityDesc').value = '';
+            document.getElementById('activityImage').value = '';
+        }
+
+        function saveActivity(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('activityTitle').value;
+            const desc = document.getElementById('activityDesc').value;
+            const image = document.getElementById('activityImage').value || 'images/activity.jpg';
+
+            const activitiesContainer = document.getElementById('activitiesContainer');
+            const newCard = document.createElement('div');
+            newCard.className = 'activity-card';
+            newCard.innerHTML = `
+                <div class="activity-image">
+                    <img src="${image}" alt="${title}">
+                </div>
+                <div class="activity-content">
+                    <h3>${title}</h3>
+                    <p>${desc}</p>
+                    <div class="activity-actions">
+                        <button class="btn btn-edit" onclick="editActivityCard(this)">แก้ไข</button>
+                        <button class="btn btn-delete" onclick="deleteActivityCard(this)">ลบ</button>
+                    </div>
+                </div>
+            `;
+            
+            activitiesContainer.appendChild(newCard);
+            closeActivityModal();
+        }
+
+        function deleteActivityCard(button) {
+            if (confirm('ต้องการลบกิจกรรมนี้ใช่หรือไม่?')) {
+                button.closest('.activity-card').remove();
+            }
+        }
+
+        function editActivityCard(button) {
+            const card = button.closest('.activity-card');
+            const title = card.querySelector('h3').textContent;
+            const desc = card.querySelector('p').textContent;
+            const image = card.querySelector('img').src;
+
+            document.querySelector('.modal-header h2').textContent = 'แก้ไขกิจกรรม';
+            document.getElementById('activityTitle').value = title;
+            document.getElementById('activityDesc').value = desc;
+            document.getElementById('activityImage').value = image;
+            
+            document.getElementById('activityModal').style.display = 'block';
+            
+            const form = document.querySelector('.modal-content form');
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                card.querySelector('h3').textContent = document.getElementById('activityTitle').value;
+                card.querySelector('p').textContent = document.getElementById('activityDesc').value;
+                card.querySelector('img').src = document.getElementById('activityImage').value;
+                closeActivityModal();
+                form.onsubmit = saveActivity;
+            };
+        }
+
+        function loadActivities() {
+            // Load activities from storage or API
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('activityModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
